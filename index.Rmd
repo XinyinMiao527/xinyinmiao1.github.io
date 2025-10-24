@@ -1,0 +1,11 @@
+---
+title: "Home"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# 👋 Welcome to Xinyin Miao's Personal Website
+
+I am a dedicated student focusing on **Quantitative Analysis**, **Statistical Modeling**, and **Data-Driven Insights**. My expertise lies in utilizing R and Python to handle complex datasets and develop machine learning solutions.
