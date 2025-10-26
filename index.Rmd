@@ -24,5 +24,5 @@ My research and project interests include:
 
 Please use the navigation bar above to explore my work:
 
-* Click **"Resume & Experience"** for my academic and professional background.
+* Click **"Resume"** for my academic and professional background.
 * Click **"Data Dashboard"** to see my data visualization work created with `flexdashboard` and `plotly`.

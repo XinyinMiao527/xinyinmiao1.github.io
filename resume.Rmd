@@ -1,5 +1,5 @@
 ---
-title: "Resume & Experience"
+title: "Resume"
 output: 
   html_document:
     toc: true
@@ -26,7 +26,7 @@ output:
 
 *	Published one SCI Q1 paper in Bioresource Technology and secured one invention patent.
 
-## 💼 **Experience**
+## 💼 **Internship Experience**
 
 ###  Industry Research, Intern - Tebon Securities Co., Ltd. 
 Shanghai, China | 03/2025-06/2025
@@ -40,5 +40,20 @@ Hangzhou, China | 08/2024-09/2024
                                   
 *	Processed over 10,000 pieces of scrapped motor vehicle data, using Excel for data cleaning; Quantified the emission reductions of various pollutants from eliminated vehicles by combining localized emission factors; Independently authored the Assessment Report on Emission Reduction Benefits of Eliminating Old Motor Vehicles
 *	Assisted in building the Jinhua City Industrial Source Pollutant Emission Inventory; Responsible for extracting key information from over 50 key enterprises' Environmental Impact Assessment reports.
+
+###  Data Analysis, Intern - Tonghuashun Network Technology Co., Ltd. 
+Hangzhou, China | 07/2023-09/2023
+                                  
+*	Used Python to clean 100,000 historical trading records of financial products; Handled 5% of missing values and identified over 2,000 trading anomalies;
+*	Explored the relationship between trading volume and price fluctuations for specific financial products; Translated analysis results into visualization reports, such as correlation heatmaps using Matplotlib;
+*	Produced weekly data insight summaries to evaluate market enthusiasm
+
+
+###  Operation, Intern - Zhejiang Soudao Network Technology Co., Ltd. 
+Hangzhou, China | 12/2022-02/2023
+                                  
+*	Responsible for monitoring new user growth data; Analyzed and pinpointed a 30% high churn rate in the "registration-first purchase" stage; Wrote a report to drive product process optimization;
+*	Used the RFM model to stratify users by value, assisting in the development of targeted operation strategies; Contributed to a 5% increase in the monthly repurchase rate of high-value users; Analyzed core revenue data (user tips, ad clicks, etc.) over four quarters
+*	Identified seasonal fluctuations and growth trends of key revenue sources.
 
 
