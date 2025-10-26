@@ -1,5 +1,5 @@
 ---
-title: "NOAA Weather Data Analysis"
+title: "NY NOAA Weather Data Analysis"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -12,5 +12,29 @@ library(plotly)
 library(p8105.datasets)
 library(dplyr)
 library(knitr)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
 ```
 
