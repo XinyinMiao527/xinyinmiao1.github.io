@@ -1,0 +1,23 @@
+name: "personal-website"
+output_dir: "."
+navbar:
+  title: "XinYin Miao"
+  type: "inverse" 
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Resume & Experience"
+      href: resume.html
+    - text: "Data Dashboard"
+      href: dashboard.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: mailto:<xm2356@cumc.columbia.com> 
+    - icon: fa-github fa-lg
+      href: http://github.com/XinyinMiao527/
+    - icon: fa-linkedin fa-lg 
+      href: https://www.linkedin.com/in/xinyin-miao-15b65a353
+output:
+  html_document:
+    theme: cosmo
+    css: styles.css
