@@ -9,3 +9,20 @@ output:
 # 👋 Welcome to Xinyin Miao's Personal Website
 
 I am a dedicated student focusing on **Quantitative Analysis**, **Statistical Modeling**, and **Data-Driven Insights**. My expertise lies in utilizing R and Python to handle complex datasets and develop machine learning solutions.
+
+---
+
+## Focus Areas
+
+My research and project interests include:
+
+* **Statistical Inference and Causal Analysis**
+* **High-Dimensional Data Visualization**
+* **Interpretable Machine Learning**
+
+## Quick Navigation
+
+Please use the navigation bar above to explore my work:
+
+* Click **"Resume & Experience"** for my academic and professional background.
+* Click **"Data Dashboard"** to see my data visualization work created with `flexdashboard` and `plotly`.
