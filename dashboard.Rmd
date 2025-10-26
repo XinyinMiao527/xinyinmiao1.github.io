@@ -124,6 +124,23 @@ Column {data-width=350}
 
 ```{r}
 
+df_temp_box <- ny_noaa_clean %>%
+  filter(id == top_temp_station,
+         year >= year_min, year <= year_max) %>%
+  filter(!is.na(tmax_c)) %>%
+  mutate(month_lab = factor(month, levels = 1:12, labels = month.abb))
+
+p_box_tmax <- df_temp_box %>%
+  plot_ly(x = ~month_lab, y = ~tmax_c, type = "box", boxpoints = "outliers",
+          name = "Tmax (°C)") %>%
+  layout(
+    title = paste0("Monthly Tmax Distribution — Station ", top_temp_station),
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Tmax (°C)")
+  )
+
+p_box_tmax
+
 ```
 
 ### Chart C
