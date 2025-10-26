@@ -124,15 +124,15 @@ Column {data-width=350}
 
 ```{r}
 
-df_temp_box <- ny_noaa_clean %>%
+df_temp_box <- ny_noaa_clean |> 
   filter(id == top_temp_station,
-         year >= year_min, year <= year_max) %>%
-  filter(!is.na(tmax_c)) %>%
+         year >= year_min, year <= year_max) |> 
+  filter(!is.na(tmax_c)) |> 
   mutate(month_lab = factor(month, levels = 1:12, labels = month.abb))
 
-p_box_tmax <- df_temp_box %>%
+p_box_tmax <- df_temp_box |> 
   plot_ly(x = ~month_lab, y = ~tmax_c, type = "box", boxpoints = "outliers",
-          name = "Tmax (°C)") %>%
+          name = "Tmax (°C)") |> 
   layout(
     title = paste0("Monthly Tmax Distribution — Station ", top_temp_station),
     xaxis = list(title = "Month"),
@@ -146,6 +146,26 @@ p_box_tmax
 ### Chart C
 
 ```{r}
+
+df_prcp_bar <- ny_noaa_clean |> 
+  filter(id == top_prcp_station,
+         year >= year_min, year <= year_max) |> 
+  filter(!is.na(prcp_mm)) |> 
+  group_by(year, month) |> 
+  summarise(total_prcp_mm = sum(prcp_mm), .groups = "drop") |> 
+  mutate(month_lab = factor(month, levels = 1:12, labels = month.abb))
+
+p_bar_prcp <- df_prcp_bar |> 
+  plot_ly(x = ~month_lab, y = ~total_prcp_mm, type = "bar",
+          color = ~factor(year)) |> 
+  layout(
+    title = paste0("Monthly Total Precipitation — Station ", top_prcp_station),
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Total precip (mm)"),
+    barmode = "group"
+  )
+
+p_bar_prcp
 
 ```
 
