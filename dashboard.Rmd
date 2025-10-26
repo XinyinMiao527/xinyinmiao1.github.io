@@ -63,6 +63,26 @@ ny_noaa_clean
 
 ```
 
+```{r}
+
+top_temp_station <- ny_noaa_clean |> 
+  filter(!is.na(tmax_c) | !is.na(tmin_c)) |> 
+  count(id, name = "n_temp_days", sort = TRUE) |> 
+  slice(1) |> 
+  pull(id)
+
+top_prcp_station <- ny_noaa_clean |> 
+  filter(!is.na(prcp_mm)) |> 
+  count(id, name = "n_prcp_days", sort = TRUE) |> 
+  slice(1) |> 
+  pull(id)
+
+year_min <- min(ny_noaa_clean$year, na.rm = TRUE)
+year_max <- max(ny_noaa_clean$year, na.rm = TRUE)
+
+
+```
+
 
 Column {data-width=650}
 -----------------------------------------------------------------------
@@ -70,6 +90,30 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
+
+df_temp_line <- ny_noaa_clean |> 
+  filter(id == top_temp_station,
+         year >= year_min, year <= year_max) |> 
+  filter(!is.na(tavg_c) | !is.na(tmax_c) | !is.na(tmin_c)) |> 
+  arrange(date)
+
+p_line <- df_temp_line |> 
+  plot_ly(x = ~date) |> 
+  add_lines(y = ~tavg_c, name = "Tavg (°C)") |> 
+  add_markers(y = ~tmax_c, name = "Tmax (°C)", alpha = 0.4,
+              text = ~paste("Date:", date, "<br>Tmax:", round(tmax_c,1), "°C"),
+              hoverinfo = "text") |> 
+  add_markers(y = ~tmin_c, name = "Tmin (°C)", alpha = 0.4,
+              text = ~paste("Date:", date, "<br>Tmin:", round(tmin_c,1), "°C"),
+              hoverinfo = "text") |> 
+  layout(
+    title = paste0("Daily Temperature — Station ", top_temp_station),
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Temperature (°C)"),
+    legend = list(orientation = "h")
+  )
+
+p_line
 
 ```
 
