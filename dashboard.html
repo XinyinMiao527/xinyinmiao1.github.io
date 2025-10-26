@@ -288,6 +288,62 @@ $(document).ready(function () {
 </div>
 
 
+<pre class="r"><code>data(ny_noaa)</code></pre>
+<pre class="r"><code>ny_noaa &lt;- ny_noaa |&gt;
+  mutate(
+    across(c(prcp, snow, snwd, tmax, tmin), ~as.numeric(.))
+  )
+
+ny_noaa_clean &lt;- ny_noaa |&gt; 
+mutate(
+date = as.Date(date),
+year = year(date),
+month = month(date),
+
+prcp_mm = ifelse(!is.na(prcp), prcp / 10, NA_real_), 
+tmax_c = ifelse(!is.na(tmax), tmax / 10, NA_real_), 
+tmin_c = ifelse(!is.na(tmin), tmin / 10, NA_real_),
+tavg_c = ifelse(!is.na(tmax) &amp; !is.na(tmin), (tmax/10 + tmin/10)/2, NA_real_)
+) |&gt; 
+select(id, date, year, month, prcp_mm, snow, snwd, tmax_c, tmin_c, tavg_c)
+
+# Identify stations with temperature coverage
+station_coverage &lt;- ny_noaa_clean |&gt; 
+summarise(
+.by = c(id, year),
+n_days = dplyr::n(),
+n_tmax = sum(!is.na(tmax_c)),
+n_tmin = sum(!is.na(tmin_c)),
+n_prcp = sum(!is.na(prcp_mm))
+) |&gt; 
+mutate(
+has_temp = n_tmax &gt;= 150 &amp; n_tmin &gt;= 150, # heuristic: ~&gt;= 5 months
+has_prcp = n_prcp &gt;= 150
+)
+
+stations_temp_any &lt;- station_coverage |&gt; 
+summarise(.by = id, has_temp_any = any(has_temp)) |&gt; 
+filter(has_temp_any) |&gt;  pull(id)
+
+stations_prcp_any &lt;- station_coverage |&gt; 
+summarise(.by = id, has_prcp_any = any(has_prcp)) |&gt; 
+filter(has_prcp_any) |&gt;  pull(id)
+
+ny_noaa_clean</code></pre>
+<pre><code>## # A tibble: 2,595,176 × 10
+##    id          date        year month prcp_mm  snow  snwd tmax_c tmin_c tavg_c
+##    &lt;chr&gt;       &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 US1NYAB0001 2007-11-01  2007    11      NA    NA    NA     NA     NA     NA
+##  2 US1NYAB0001 2007-11-02  2007    11      NA    NA    NA     NA     NA     NA
+##  3 US1NYAB0001 2007-11-03  2007    11      NA    NA    NA     NA     NA     NA
+##  4 US1NYAB0001 2007-11-04  2007    11      NA    NA    NA     NA     NA     NA
+##  5 US1NYAB0001 2007-11-05  2007    11      NA    NA    NA     NA     NA     NA
+##  6 US1NYAB0001 2007-11-06  2007    11      NA    NA    NA     NA     NA     NA
+##  7 US1NYAB0001 2007-11-07  2007    11      NA    NA    NA     NA     NA     NA
+##  8 US1NYAB0001 2007-11-08  2007    11      NA    NA    NA     NA     NA     NA
+##  9 US1NYAB0001 2007-11-09  2007    11      NA    NA    NA     NA     NA     NA
+## 10 US1NYAB0001 2007-11-10  2007    11      NA    NA    NA     NA     NA     NA
+## # ℹ 2,595,166 more rows</code></pre>
 <div id="column" class="section level2" data-width="650">
 <h2>Column</h2>
 <div id="chart-a" class="section level3">
