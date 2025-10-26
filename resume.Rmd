@@ -11,13 +11,13 @@ output:
 ## 🎓 **Education**
 
 
-### **Master of Environmental Health Data Science**
+### Master of Environmental Health Data Science
 **Columbia University**, New York, US | 2025 – 2026
 
 * **Core Coursework:** Data Science, Biostatistical Models, Public Health GIS, Machine Learning for Epidemiology, Advanced Analytical Patterns, etc.
 
 
-### **Bachelor of Environmental Engineering**
+### Bachelor of Environmental Engineering
 **Zhejiang University**, Hangzhou, China | 2021 – 2025
 
 *	GPA: 3.85/4.00 (86.83/100)
@@ -55,5 +55,13 @@ Hangzhou, China | 12/2022-02/2023
 *	Responsible for monitoring new user growth data; Analyzed and pinpointed a 30% high churn rate in the "registration-first purchase" stage; Wrote a report to drive product process optimization;
 *	Used the RFM model to stratify users by value, assisting in the development of targeted operation strategies; Contributed to a 5% increase in the monthly repurchase rate of high-value users; Analyzed core revenue data (user tips, ad clicks, etc.) over four quarters
 *	Identified seasonal fluctuations and growth trends of key revenue sources.
+
+## 🛠 **Core Skills**
+
+| Category | Skills |
+|:---|:---|
+| **Programming** | R (Tidyverse), Python (Pandas, NumPy, Scikit-learn), SQL |
+| **Visualization** | Plotly, ggplot2, Flexdashboard |
+
 
 
