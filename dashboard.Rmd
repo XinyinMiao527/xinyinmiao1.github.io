@@ -34,29 +34,6 @@ tavg_c = ifelse(!is.na(tmax) & !is.na(tmin), (tmax/10 + tmin/10)/2, NA_real_)
 select(id, date, year, month, prcp_mm, snow, snwd, tmax_c, tmin_c, tavg_c) |> 
 filter(year >= 2000 & year <= 2010)
   
-# Identify stations with temperature coverage
-station_coverage <- ny_noaa_clean |> 
-summarise(
-.by = c(id, year),
-n_days = dplyr::n(),
-n_tmax = sum(!is.na(tmax_c)),
-n_tmin = sum(!is.na(tmin_c)),
-n_prcp = sum(!is.na(prcp_mm))
-) |> 
-mutate(
-has_temp = n_tmax >= 150 & n_tmin >= 150, # heuristic: ~>= 5 months
-has_prcp = n_prcp >= 150
-)
-
-stations_temp_any <- station_coverage |> 
-summarise(.by = id, has_temp_any = any(has_temp)) |> 
-filter(has_temp_any) |>  pull(id)
-
-stations_prcp_any <- station_coverage |> 
-summarise(.by = id, has_prcp_any = any(has_prcp)) |> 
-filter(has_prcp_any) |>  pull(id)
-
-
 top_temp_station <- ny_noaa_clean |> 
   filter(!is.na(tmax_c) | !is.na(tmin_c)) |> 
   count(id, name = "n_temp_days", sort = TRUE) |> 
@@ -69,8 +46,8 @@ top_prcp_station <- ny_noaa_clean |>
   slice(1) |> 
   pull(id)
 
-year_min <- min(ny_noaa_clean$year, na.rm = TRUE)
-year_max <- max(ny_noaa_clean$year, na.rm = TRUE)
+year_min <- 2000
+year_max <- 2010
 ```
 
 
