@@ -12,13 +12,9 @@ library(plotly)
 library(p8105.datasets)
 library(knitr)
 library(tidyverse)
-```
-
-```{r}
 data(ny_noaa)
-```
 
-```{r}
+
 ny_noaa <- ny_noaa |>
   mutate(
     across(c(prcp, snow, snwd, tmax, tmin), ~as.numeric(.))
@@ -35,8 +31,9 @@ tmax_c = ifelse(!is.na(tmax), tmax / 10, NA_real_),
 tmin_c = ifelse(!is.na(tmin), tmin / 10, NA_real_),
 tavg_c = ifelse(!is.na(tmax) & !is.na(tmin), (tmax/10 + tmin/10)/2, NA_real_)
 ) |> 
-select(id, date, year, month, prcp_mm, snow, snwd, tmax_c, tmin_c, tavg_c)
-
+select(id, date, year, month, prcp_mm, snow, snwd, tmax_c, tmin_c, tavg_c) |> 
+filter(year >= 2000 & year <= 2010)
+  
 # Identify stations with temperature coverage
 station_coverage <- ny_noaa_clean |> 
 summarise(
@@ -59,11 +56,6 @@ stations_prcp_any <- station_coverage |>
 summarise(.by = id, has_prcp_any = any(has_prcp)) |> 
 filter(has_prcp_any) |>  pull(id)
 
-ny_noaa_clean
-
-```
-
-```{r}
 
 top_temp_station <- ny_noaa_clean |> 
   filter(!is.na(tmax_c) | !is.na(tmin_c)) |> 
@@ -79,17 +71,16 @@ top_prcp_station <- ny_noaa_clean |>
 
 year_min <- min(ny_noaa_clean$year, na.rm = TRUE)
 year_max <- max(ny_noaa_clean$year, na.rm = TRUE)
-
-
 ```
 
 
-Column {data-width=650}
+
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Chart A
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE }
 
 df_temp_line <- ny_noaa_clean |> 
   filter(id == top_temp_station,
@@ -117,12 +108,12 @@ p_line
 
 ```
 
-Column {data-width=350}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Chart B
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE }
 
 df_temp_box <- ny_noaa_clean |> 
   filter(id == top_temp_station,
@@ -145,11 +136,11 @@ p_box_tmax
 
 ### Chart C
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE }
 
 df_prcp_bar <- ny_noaa_clean |> 
   filter(id == top_prcp_station,
-         year >= year_min, year <= year_max) |> 
+         year >= 2005, year <= 2010) |> 
   filter(!is.na(prcp_mm)) |> 
   group_by(year, month) |> 
   summarise(total_prcp_mm = sum(prcp_mm), .groups = "drop") |> 
